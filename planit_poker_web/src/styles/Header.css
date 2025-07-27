@@ -1,0 +1,29 @@
+.header-style {
+  background-color: #000099;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 80px;
+  max-height: 80px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  height: 50px;
+  color: white;
+  z-index: 7;
+}
+
+.logo-style {
+  display: flex;
+  align-items: center;
+}
+
+.image-header-style {
+  max-height: 80px;
+  max-width: 80px;
+}
+
+.user-header {
+  margin-right: 20px;
+}

@@ -1,0 +1,87 @@
+.card-title {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.statistic-end-game-container {
+  background-color: #f0f2f5;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+.end-game-cards {
+  width: 20%;
+  max-width: 25%;
+  min-width: 20%;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
+}
+
+.end-game-cards:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+.page-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #333;
+}
+
+.review-feedback {
+  padding-bottom: 5px;
+}
+
+.reviews {
+  max-height: 20vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.reviews-username {
+  font-size: 2.3vh;
+  padding-bottom: 5px;
+}
+
+.reviews-rating {
+  padding-bottom: 12px;
+}
+
+.float-button {
+  left: 24px;
+}
+
+.ant-carousel .slick-dots li button {
+  background: black;
+  opacity: 0.4;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+  opacity: 1;
+  background: black;
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-next:hover,
+.ant-carousel .slick-prev:focus,
+.ant-carousel .slick-next:focus {
+  font-size: inherit;
+  color: currentColor;
+}
+
+.pie-card {
+  max-height: 30%;
+}
+
+.pie {
+  max-height: 15%;
+  overflow: hidden;
+}
+.statistic-end-game-flex {
+  width: 100%;
+  height: 80vh;
+}

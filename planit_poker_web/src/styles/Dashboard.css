@@ -1,0 +1,48 @@
+.custom-sider {
+  background-color: #f2f4f7 !important;
+  z-index: 7;
+  color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.custom-menu {
+  background-color: #f2f4f7 !important;
+  border: none !important;
+}
+
+.ant-layout-sider-trigger {
+  background-color: #f2f4f7 !important;
+  min-height: 100%;
+  color: #000099;
+  height: 100%;
+}
+
+.ant-layout-sider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.user-card.shifted {
+  margin-left: 250px; /* Shift when sidebar is open */
+}
+
+.ant-menu-title-content {
+  color: #000099;
+  font-size: larger;
+}
+
+.ant-menu .ant-menu-item {
+  margin-top: 1vh;
+}
+
+.ant-menu .ant-menu-item .ant-menu-item-icon svg {
+  color: #000099;
+  height: fit-content;
+  font-size: 20px;
+}
+
+.ant-menu-item.ant-menu-item-selected {
+  background-color: #a3a3a3;
+}

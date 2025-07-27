@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240730-1330" author="teamaia">
+        <createTable tableName="user_story">
+
+            <column name="story_id" type="bigint"/>
+            <column name="user_id" type="bigint"/>
+            <column name="estimation" type="varchar(100)"/>
+            <column name="voted_time" type="timestamp"/>
+
+
+        </createTable>
+        <addForeignKeyConstraint  baseColumnNames="story_id"
+                                  baseTableName="user_story"
+                                  constraintName="fk_story_in_user_story"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="CASCADE"
+                                  referencedColumnNames="id"
+                                  referencedTableName="stories"
+        />
+        <addForeignKeyConstraint  baseColumnNames="user_id"
+                                  baseTableName="user_story"
+                                  constraintName="fk_user_in_user_story"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="CASCADE"
+                                  referencedColumnNames="id"
+                                  referencedTableName="users"
+        />
+        <addPrimaryKey tableName="user_story" columnNames="story_id,user_id" constraintName="pk_user_story"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,59 @@
+.home-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  justify-content: center;
+}
+
+.home-content.shifted {
+  margin-left: 150px; /* Shift when sidebar is open */
+}
+
+.image-card {
+  height: 50vh !important;
+  width: 80vh !important;
+  /* display: inline-block; */
+  margin-top: 100px;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  background-image: url("../images/adminHome.png");
+  background-size: cover; /* Ensures the image covers the entire card */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat;
+}
+
+.home-cards-top-left {
+  height: 20vh !important;
+  width: 30vh !important;
+  margin-top: 100px;
+  font-size: large;
+  background-color: #eaadc4;
+}
+
+.home-cards-top-right {
+  height: 20vh !important;
+  width: 30vh !important;
+  margin-top: 100px;
+  font-size: large;
+  background-color: #daeff1;
+}
+
+.home-cards-bottom-left {
+  height: 20vh !important;
+  width: 30vh !important;
+  font-size: large;
+  background-color: #efbd27;
+}
+
+.home-cards-bottom-right {
+  height: 20vh !important;
+  width: 30vh !important;
+  font-size: large;
+  background-color: #4f92c2;
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 1rem 2rem;
+}

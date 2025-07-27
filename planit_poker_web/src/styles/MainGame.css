@@ -1,0 +1,169 @@
+@keyframes rgbShadow {
+  0% {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+  }
+  33% {
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.7);
+  }
+  66% {
+    box-shadow: 0 0 15px rgba(0, 0, 255, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.7);
+  }
+}
+
+.flipper {
+  position: relative;
+  width: 4vw;
+  height: 5vw;
+  max-width: 150px;
+  max-height: 225px;
+  perspective: 800px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.flipper:hover {
+  transform: translateY(-10px);
+}
+.flipper-card {
+  width: 4vw;
+  height: 5vw;
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.flipper-front,
+.flipper-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.flipper-back {
+  transform: rotateY(180deg);
+}
+
+.flipper-card.flipper-is-flipped {
+  transform: rotateY(180deg);
+}
+
+.icons-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.loading-icon {
+  color: #b1e3ee;
+}
+
+.check-icon {
+  color: #b1e3ee;
+  font-size: 3vh;
+}
+
+.tableContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 70%;
+  box-sizing: border-box;
+  resize: none;
+}
+
+.table {
+  width: 40%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  background-color: #9ad3fc;
+  border-radius: 20px;
+  border: 5px solid #9ad3fc;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  resize: none;
+
+  animation: rgbShadow 2s infinite alternate;
+}
+
+.cardPosition {
+  position: absolute;
+  resize: none;
+  transition: transform 0.3s ease;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-username {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+  font-size: 0.8em;
+  margin-bottom: 5px;
+
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.2em;
+  height: 2.4em;
+}
+
+.card-details {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1em;
+  font-size: 1em;
+  margin-top: 130%;
+  margin-left: 10%;
+  margin-right: 10%;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.top-position .card-details {
+  flex-direction: column-reverse;
+  bottom: 120%;
+  top: auto;
+  margin-bottom: 10px;
+}
+
+.left-position .card-details {
+  flex-direction: row-reverse;
+}
+
+.right-position .card-details {
+  flex-direction: row;
+}
+
+/*.footer-main-game {*/
+/*  transition: margin-bottom 0.3s ease;*/
+/*}*/

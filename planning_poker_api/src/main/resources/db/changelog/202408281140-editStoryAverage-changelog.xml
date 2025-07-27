@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="20240828-1140" author="tmihaita">
+        <modifyDataType tableName="stories" columnName="average" newDataType="varchar(255)"/>
+
+        <addDefaultValue tableName="stories" columnName="average" defaultValue="N/A"/>
+    </changeSet>
+
+    <changeSet id="20240828-1140-2" author="tmihaita">
+        <update tableName="stories">
+            <column name="average" value="N/A"/>
+            <where>average = '0'</where>
+        </update>
+    </changeSet>
+</databaseChangeLog>

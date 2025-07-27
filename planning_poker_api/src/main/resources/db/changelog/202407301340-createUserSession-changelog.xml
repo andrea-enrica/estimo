@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240730-1340" author="teamaia">
+        <createTable tableName="user_session">
+
+            <column name="session_id" type="bigint"/>
+            <column name="user_id" type="bigint"/>
+            <column name="role" type="varchar(50)"/>
+            <column name="rating" type="integer"/>
+            <column name="feedback" type="varchar(256)"/>
+
+        </createTable>
+        <addForeignKeyConstraint  baseColumnNames="session_id"
+                                  baseTableName="user_session"
+                                  constraintName="fk_session_in_user_session"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="CASCADE"
+                                  referencedColumnNames="id"
+                                  referencedTableName="sessions"
+        />
+        <addForeignKeyConstraint  baseColumnNames="user_id"
+                                  baseTableName="user_session"
+                                  constraintName="fk_user_in_user_session"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="CASCADE"
+                                  referencedColumnNames="id"
+                                  referencedTableName="users"
+        />
+        <addPrimaryKey tableName="user_session" columnNames="session_id,user_id" constraintName="pk_user_session"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20240730-1225" author="teamaia">
+        <createTable tableName="stories">
+            <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
+            <constraints primaryKey="true"/>
+            </column>
+            <column name="title" type="varchar(256)"/>
+            <column name="description" type="varchar(256)"/>
+            <column name="average" type="real"/>
+            <column name="story_priority_number" type="integer"/>
+            <column name="session_id" type="bigint"/>
+
+        </createTable>
+        <addForeignKeyConstraint  baseColumnNames="session_id"
+                                  baseTableName="stories"
+                                  constraintName="fk_stories_session"
+                                  deferrable="true"
+                                  initiallyDeferred="true"
+                                  onDelete="CASCADE"
+                                  onUpdate="CASCADE"
+                                  referencedColumnNames="id"
+                                  referencedTableName="sessions"
+        />
+
+    </changeSet>
+
+</databaseChangeLog>

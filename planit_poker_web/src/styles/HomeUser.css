@@ -1,0 +1,79 @@
+.home-content {
+  display: flex;
+  padding-top: 30px;
+  padding-left: 80px;
+}
+
+.home-content.shifted {
+  margin-left: 8%; /* Shift when sidebar is open */
+}
+
+.flip-card {
+  background-color: transparent;
+  width: 30%;
+  height: 20vw;
+  margin: 1vw;
+}
+
+.flip-card-in {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-card-in {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+.flipped-card {
+  width: 100%;
+  height: 100%;
+  background-color: #f2f4f7;
+  color: #000099;
+  font-size: 30px;
+  padding: 1vh;
+}
+
+.flipped-card-back {
+  background-color: #a3a3a3;
+  color: #000099;
+  font-size: medium;
+
+}
+
+.text-size-front {
+  font-size: 1.5vw;
+}
+
+.text-size-back {
+  font-size: 1.5vw;
+  padding-top: 1vw;
+}
+
+.first-style {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  width: 100%;
+  align-content: center;
+  font-size: xx-large;
+  margin-left: 80px;
+  margin-top: 130px;
+  min-height: 280px;
+  background-color: #f2f4f7;
+}
+
+.best {
+  color: #000099;
+}

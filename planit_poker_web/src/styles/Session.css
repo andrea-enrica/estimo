@@ -1,0 +1,103 @@
+.sessionCard {
+  height: 450px !important;
+  width: 300px !important;
+  display: inline-block;
+  margin: 10px;
+  padding: 5px;
+}
+
+.sessionsContainer {
+  margin-top: 10%;
+  margin-left: 5%;
+  align-items: center;
+  justify-content: center;
+}
+
+.sessionsContainer.shifted {
+  margin-left: 250px;
+}
+
+.filterButtons {
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+
+.ant-btn-primary {
+  background-color: #000099;
+}
+
+.sessionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  justify-content: center;
+}
+
+.sessionGrid.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-height: 450px;
+}
+
+.edit-session-title-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.session-update-modal-title {
+  font-size: 32px;
+  padding-top: 5%;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5%;
+}
+
+.title-input {
+  font-size: 18px;
+  height: 40px;
+}
+.custom-button {
+  margin-top: 15px;
+  font-size: 16px;
+  height: 35px;
+  padding: 10px 20px 10px;
+}
+
+.session-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: -80px;
+}
+
+.session-card-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 10%;
+}
+
+.sessionCard {
+  width: 100%;
+  position: relative;
+}
+
+.card-button {
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+  z-index: 1;
+}
+
+.alert-message {
+  color: red;
+}

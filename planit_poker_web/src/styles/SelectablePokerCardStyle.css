@@ -1,0 +1,25 @@
+.selectable-card {
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  margin: 5px;
+}
+
+.selectable-card-inner {
+  width: 4vw;
+  height: 5vw;
+}
+
+.selectable-card:hover {
+  transform: scale(1.1);
+  background-color: transparent;
+}
+
+.selected-card {
+  z-index: 10;
+  transform: scale(1.1);
+}
+
+.footer-svg-card {
+  display: block;
+}
