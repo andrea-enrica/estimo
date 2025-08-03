@@ -5,7 +5,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="20240730-1200" author="teamaia">
+    <changeSet id="20250730-1200" author="andrea">
         <createTable tableName="users">
             <column name="id" type="bigint">
                 <constraints primaryKey="true"/>
@@ -31,7 +31,7 @@
 
         </createTable>
     </changeSet>
-    <changeSet author="teamaia" id="20240730-1200-2">
+    <changeSet author="andrea" id="20250730-1200-2">
         <addAutoIncrement tableName="users" columnName="id" incrementBy="1"/>
     </changeSet>
 </databaseChangeLog>

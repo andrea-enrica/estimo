@@ -5,7 +5,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="20240730-1205" author="teamaia">
+    <changeSet id="20250730-1205" author="andrea">
         <createTable tableName="sessions">
             <column name="id" type="bigint" autoIncrement="true" startWith="1" incrementBy="1">
             <constraints primaryKey="true"/>

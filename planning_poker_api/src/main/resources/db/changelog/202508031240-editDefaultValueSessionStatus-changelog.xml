@@ -5,14 +5,8 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="20240821-1000" author="tmihaita">
-        <addDefaultValue tableName="sessions" columnName="status" defaultValue="IDLE"/>
-    </changeSet>
-
-    <changeSet id="20240821-1000-2" author="tmihaita">
-        <update tableName="sessions">
-            <column name="status" value="IDLE"/>
-        </update>
+    <changeSet id="20250803-1240" author="andrea">
+        <addDefaultValue tableName="user_session" columnName="status" defaultValue="INVITED"/>
     </changeSet>
 
 </databaseChangeLog>

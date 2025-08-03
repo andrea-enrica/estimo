@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class UserSessionDetailsDto {
-
     private UserSessionKeyDto id;
     private String role;
     private Integer rating;

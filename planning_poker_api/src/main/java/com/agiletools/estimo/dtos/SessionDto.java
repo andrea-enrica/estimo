@@ -8,7 +8,6 @@ import java.time.LocalDateTime;
 
 @Data
 public class SessionDto {
-    
     private Long id;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateCreated;

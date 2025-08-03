@@ -5,7 +5,7 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="20240730-1340" author="teamaia">
+    <changeSet id="20250730-1340" author="andrea">
         <createTable tableName="user_session">
 
             <column name="session_id" type="bigint"/>

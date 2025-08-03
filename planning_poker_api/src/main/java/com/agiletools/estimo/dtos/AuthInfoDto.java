@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class AuthInfoDto {
-    
     private String token;
     private UserProfileDto userDetails;
 }

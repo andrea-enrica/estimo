@@ -5,11 +5,14 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <changeSet id="20240802-1130" author="mrobert">
-        <addColumn tableName="sessions">
-            <column name="title"
-                    type="varchar(255)" defaultValue="new room"/>
-        </addColumn>
+    <changeSet id="20250801-1000" author="andrea">
+        <addDefaultValue tableName="sessions" columnName="status" defaultValue="IDLE"/>
+    </changeSet>
+
+    <changeSet id="20250803-1000-2" author="andrea">
+        <update tableName="sessions">
+            <column name="status" value="IDLE"/>
+        </update>
     </changeSet>
 
 </databaseChangeLog>

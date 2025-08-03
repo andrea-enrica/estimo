@@ -8,7 +8,6 @@ import java.util.List;
 @Data
 @Builder
 public class PaginatedResponse<T> {
-    
     private List<T> content;
     private Integer currentPage;
     private Integer totalPages;
