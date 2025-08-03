@@ -41,7 +41,7 @@ export default function UserHomePage() {
   return (
     <>
       {contextHolder}
-      <div>
+      <div style={{overflow: "hidden"}}>
         <CustomDashboard
           isOpen={isOpen}
           toggleSidebar={toggleSidebar}
