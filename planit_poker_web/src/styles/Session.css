@@ -4,6 +4,8 @@
   display: inline-block;
   margin: 10px;
   padding: 5px;
+  color: #395a6d;
+  font-weight: normal;
 }
 
 .sessionsContainer {
@@ -97,6 +99,7 @@
 }
 
 .session-card-container {
+  color: #395a6d;
   position: relative;
   width: 100%;
   max-width: 300px;
@@ -104,8 +107,16 @@
 }
 
 .sessionCard {
+  background-color: #f8f1e7;
+  color: #395a6d;
+  font-size: medium !important;
   width: 100%;
   position: relative;
+}
+
+.ant-card-meta-title {
+  color: #395a6d !important;
+  font-weight: 500 !important;
 }
 
 .card-button {

@@ -14,6 +14,7 @@ export default function EstimationStatisticsCard(props: IOwnProps) {
   return (
     <Card className="end-game-cards">
       <Meta
+          className="ant-card-meta-title"
         title="Estimation Statistics"
         description="Voted percentage of connected users per story"
       />

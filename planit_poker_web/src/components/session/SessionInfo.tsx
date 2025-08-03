@@ -86,7 +86,7 @@ export default function SessionInfo(props: IOwnProps) {
             filter === FilterSessionsEnum.INVITED ? () => {} : handleCardClick
           }
         >
-          <Meta title={`${session.title}`} />
+          <h3 style={{color: "#395a6d", fontWeight: "bold"}}>{session.title}</h3>
           <p>{`Status: ${session.status} `}</p>
           <p>{`Date Created: ${session.dateCreated} `}</p>
           <p>{`Date Ended: ${
