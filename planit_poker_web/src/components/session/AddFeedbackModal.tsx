@@ -58,6 +58,7 @@ export default function AddFeedbackModal(props: IOwnProps) {
           </Button>,
           <Button
             key="submit"
+            className="primary-button"
             type="primary"
             htmlType="submit"
             form="addFeedbackForm"
