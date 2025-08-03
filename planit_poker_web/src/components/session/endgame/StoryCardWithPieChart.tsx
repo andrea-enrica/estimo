@@ -34,9 +34,9 @@ export default function StoryCardWithPieChart({
 
   return (
     <>
-      <Typography.Title level={2}>{story.title}</Typography.Title>
+      <Typography.Title style={{color: "#395a6d"}} level={2}>{story.title}</Typography.Title>
 
-      <Typography.Title level={4}>Average: {story.average}</Typography.Title>
+      <Typography.Title style={{color: "#395a6d"}}  level={4}>Average: {story.average}</Typography.Title>
       <div className="pie">
         <Pie {...chartConfig} />
       </div>

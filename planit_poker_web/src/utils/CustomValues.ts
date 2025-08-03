@@ -10,8 +10,6 @@ export const customValuesFibonacci: SelectProps["options"] = [
   { label: "13", value: "13" },
   { label: "21", value: "21" },
   { label: "34", value: "34" },
-  { label: "55", value: "55" },
-  { label: "89", value: "89" },
   { label: "?", value: "?" },
   { label: "Coffee", value: "Coffee" }
 ];
@@ -26,8 +24,6 @@ export const customValuesScrum: SelectProps["options"] = [
   { label: "8", value: "8" },
   { label: "13", value: "13" },
   { label: "20", value: "20" },
-  { label: "40", value: "40" },
-  { label: "100", value: "100" },
   { label: "?", value: "?" },
   { label: "Coffee", value: "Coffee" }
 ];
@@ -70,8 +66,6 @@ export const customValuesHours: SelectProps["options"] = [
   { label: "12", value: "12" },
   { label: "16", value: "16" },
   { label: "24", value: "24" },
-  { label: "32", value: "32" },
-  { label: "40", value: "40" },
   { label: "?", value: "?" },
   { label: "Coffee", value: "Coffee" }
 ];

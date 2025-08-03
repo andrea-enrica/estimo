@@ -66,7 +66,7 @@ export default function UpdateSessionModal(props: IOwnProps) {
           htmlType="submit"
           type="primary"
           form="myForm"
-          className="custom-button"
+          className="custom-button primary-button"
           icon={<SaveOutlined />}
         >
           Save

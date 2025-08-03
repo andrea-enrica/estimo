@@ -24,7 +24,6 @@ import {
   PlayCircleOutlined,
   StopOutlined,
   RightOutlined,
-  UserAddOutlined,
   PieChartOutlined,
   SettingOutlined,
   FieldTimeOutlined,
@@ -58,7 +57,6 @@ interface ISessionDashboardProps {
   handleUpdateAverage: (avg: string) => void;
   showDrawerParticipants: () => void;
   showDrawerStories: () => void;
-  // toggleInviteUsersModal: () => void;
   toggleLeaveSessionModal: () => void;
   toggleAddFeedbackModal: () => void;
   flipAllCards: () => void;
@@ -82,7 +80,6 @@ interface ISessionControlProps {
   onNextStory: () => void;
   showDrawerParticipants: () => void;
   showDrawerStories: () => void;
-  // toggleInviteUsersModal: () => void;
   toggleLeaveSessionModal: () => void;
   toggleAddFeedbackModal: () => void;
   flipAllCards: () => void;
@@ -125,7 +122,6 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
     onStartSession,
     onEndSession,
     onNextStory,
-    // toggleInviteUsersModal,
     toggleLeaveSessionModal,
     toggleAddFeedbackModal,
     flipAllCards,
@@ -139,8 +135,8 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
     getAuthenticatedUserClaim(LocalStorageProperties.id)
   );
   const progressBarColor: ProgressProps["strokeColor"] = {
-    "0%": "#108ee9",
-    "100%": "#87d068"
+    "0%": "#5c859e",
+    "100%": "#8a9e77"
   };
 
   const refStartSession = useRef(null);
@@ -174,11 +170,6 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
       target: () => refStopEstimation.current
     },
     {
-      title: "Invite Users",
-      description: "Invite more users to the session.",
-      target: () => refInviteUsers.current
-    },
-    {
       title: "See Statistics",
       description:
         "See the statistics of this session, after the session has ended!",
@@ -199,34 +190,6 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
   return (
     <>
       <Flex gap="small" vertical className="story-progress-container">
-        {/*<Alert*/}
-        {/*  className="story-details-container"*/}
-        {/*  type="info"*/}
-        {/*  message={*/}
-        {/*    <>*/}
-        {/*      <Typography.Title className="story-info" level={5}>*/}
-        {/*        {SessionDashboard.CURRENT_STORY + ":"}*/}
-        {/*      </Typography.Title>*/}
-
-        {/*      {currentStory ? (*/}
-        {/*        <Typography.Title level={5}>*/}
-        {/*          {currentStory.title}*/}
-        {/*        </Typography.Title>*/}
-        {/*      ) : (*/}
-        {/*        <Typography.Title level={5}>*/}
-        {/*          {SessionDashboard.WAITING_TO_START}{" "}*/}
-        {/*        </Typography.Title>*/}
-        {/*      )}*/}
-        {/*    </>*/}
-        {/*  }*/}
-        {/*  description={*/}
-        {/*    currentStory && currentStory.description !== null && (*/}
-        {/*      <Typography.Paragraph>*/}
-        {/*        {SessionDashboard.STORY_DETAILS + ": "}{currentStory.description}*/}
-        {/*      </Typography.Paragraph>*/}
-        {/*    )*/}
-        {/*  }*/}
-        {/*/>*/}
         <Progress
           className="progress-bar"
           status="active"
@@ -472,7 +435,7 @@ const EstimationStatisticsContent = (props: ISessionStatisticsProps) => {
         </span>
       }
       title={
-        <Typography.Title level={3}>
+        <Typography.Title level={3} style={{color: "#395a6d"}}>
           Waiting for a story estimation to be completed...
         </Typography.Title>
       }
@@ -526,18 +489,18 @@ export default function SessionControlDashboard(props: ISessionDashboardProps) {
     {
       key: "estimationControls",
       tab: (
-        <span className="tab-label">
-          <SettingOutlined className="tab-icon" />
-          <span className="tab-text">Controls</span>
+        <span className="tab-label" style={{color: "white"}}>
+          <SettingOutlined className="tab-icon" style={{color: "white"}}/>
+          <span className="tab-text" style={{color: "white"}}>Controls</span>
         </span>
       )
     },
     {
       key: "estimationStatistics",
       tab: (
-        <span className="tab-label">
-          <PieChartOutlined className="tab-icon" />
-          <span className="tab-text">Statistics</span>
+        <span className="tab-label" style={{color: "white"}}>
+          <PieChartOutlined className="tab-icon" style={{color: "white"}} />
+          <span className="tab-text" style={{color: "white"}}>Statistics</span>
         </span>
       )
     }
@@ -598,7 +561,7 @@ export default function SessionControlDashboard(props: ISessionDashboardProps) {
         className="session-dashboard-content"
         title={
           <>
-            <div>Session Dashboard</div>
+            <div style={{color: "#395a6d"}}>Session Dashboard</div>
             <br />
           </>
         }

@@ -22,7 +22,7 @@ export default function LeaveSessionModal(props: IOwnProps) {
         <Button key="Cancel" onClick={onClose} shape="round">
           Cancel
         </Button>,
-        <Button key="submit" type="primary" danger onClick={handleOnSubmit}>
+        <Button className="primary-button" key="submit" type="primary" danger onClick={handleOnSubmit}>
           Leave
         </Button>
       ]}

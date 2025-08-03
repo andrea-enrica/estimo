@@ -11,10 +11,10 @@ export default function NotFoundPage() {
       extra={
         <>
           <Link to={RoutePaths.ADMIN_USER_MANAGER_HOME}>
-            <Button type="primary">Back to Home Page</Button>
+            <Button className="primary-button" type="primary">Back to Home Page</Button>
           </Link>
           <Link to={RoutePaths.LOGIN}>
-            <Button type="primary">Back to Login</Button>
+            <Button className="primary-button" type="primary">Back to Login</Button>
           </Link>
         </>
       }

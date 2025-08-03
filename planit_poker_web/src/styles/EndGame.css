@@ -1,12 +1,14 @@
 .card-title {
   font-size: 3em;
   font-weight: bold;
+  color: #395a6d;
 }
 
 .statistic-end-game-container {
-  background-color: #f0f2f5;
+  background-color: #cad8de;
   padding: 20px;
   min-height: 100vh;
+  color: #395a6d;
 }
 
 .end-game-cards {
@@ -17,20 +19,31 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   transition: box-shadow 0.3s ease;
+  color: #395a6d;
 }
 
 .end-game-cards:hover {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
+
+.statistics-card {
+  color: #395a6d;
+}
+
 .page-title {
   text-align: center;
   margin-bottom: 20px;
   font-size: 2em;
   font-weight: bold;
-  color: #333;
+  color: #395a6d;
+}
+
+.carousel {
+  color: #395a6d;
 }
 
 .review-feedback {
+  color: #395a6d;
   padding-bottom: 5px;
 }
 
@@ -46,6 +59,7 @@
 }
 
 .reviews-rating {
+  color: #395a6d;
   padding-bottom: 12px;
 }
 
@@ -54,13 +68,13 @@
 }
 
 .ant-carousel .slick-dots li button {
-  background: black;
+  background: #395a6d;
   opacity: 0.4;
 }
 
 .ant-carousel .slick-dots li.slick-active button {
   opacity: 1;
-  background: black;
+  background: #395a6d;;
 }
 
 .ant-carousel .slick-prev,
@@ -70,7 +84,7 @@
 .ant-carousel .slick-prev:focus,
 .ant-carousel .slick-next:focus {
   font-size: inherit;
-  color: currentColor;
+  color: #395a6d;
 }
 
 .pie-card {

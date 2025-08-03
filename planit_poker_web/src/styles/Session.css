@@ -22,8 +22,24 @@
   margin-bottom: 3%;
 }
 
-.ant-btn-primary {
-  background-color: #000099;
+.delete-button {
+  background-color: #d94e4e !important;
+}
+
+.story-table-color {
+  color: #395a6d;
+}
+
+.delete-button:hover {
+  background-color: #a63c3c !important;
+}
+
+.primary-button {
+  background-color: #395a6d !important;
+}
+
+.primary-button:hover {
+  background-color: #5c859e !important;
 }
 
 .sessionGrid {
@@ -61,6 +77,7 @@
   height: 40px;
 }
 .custom-button {
+
   margin-top: 15px;
   font-size: 16px;
   height: 35px;

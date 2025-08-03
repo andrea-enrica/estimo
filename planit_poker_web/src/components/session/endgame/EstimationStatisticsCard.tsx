@@ -12,7 +12,7 @@ export default function EstimationStatisticsCard(props: IOwnProps) {
     useGetEstimationPercentInSessionStoriesQuery({ sessionId });
   const progressList = estimationStories ? estimationStories : [];
   return (
-    <Card className="end-game-cards statistics-card">
+    <Card className="end-game-cards">
       <Meta
         title="Estimation Statistics"
         description="Voted percentage of connected users per story"

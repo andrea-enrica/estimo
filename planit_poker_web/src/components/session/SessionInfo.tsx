@@ -101,15 +101,16 @@ export default function SessionInfo(props: IOwnProps) {
                 icon={<PlusOutlined />}
                 onClick={handleAcceptInvite}
                 type="primary"
+                className="primary-button"
                 size="large"
               >
                 Accept
               </Button>
               <Button
-                danger
                 icon={<MinusOutlined />}
                 onClick={handleDeclineInvite}
                 type="primary"
+                className="delete-button"
                 size="large"
               >
                 Decline
@@ -121,7 +122,7 @@ export default function SessionInfo(props: IOwnProps) {
         {filter === FilterSessionsEnum.MANAGED && (
           <>
             <Button
-              className="card-button"
+              className="card-button primary-button"
               icon={<EditOutlined />}
               onClick={() => {
                 setShowUpdateModal(true);

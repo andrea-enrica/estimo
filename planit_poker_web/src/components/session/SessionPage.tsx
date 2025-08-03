@@ -632,7 +632,7 @@ export default function SessionPage() {
             tooltip="Functionalities tour"
             type="primary"
             onClick={toggleOpen}
-            className="float-button"
+            className="float-button primary-button"
             icon={<QuestionOutlined />}
           />
         )}
@@ -707,7 +707,7 @@ export default function SessionPage() {
                 />
               )}
 
-              <PokerTable cards={cards} toggleCardFlip={toggleCardFlip} currentStory={currentStory} onRevoteStory={handleRevoteStory} />
+              <PokerTable cards={cards} toggleCardFlip={toggleCardFlip} currentStory={currentStory} onRevoteStory={handleRevoteStory}/>
 
               {isSessionActive &&
                 isStoryInProgress &&

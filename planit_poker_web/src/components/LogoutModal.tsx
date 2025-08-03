@@ -19,7 +19,7 @@ export default function LogoutModal(props: IOwnProps) {
           <Button key="cancel" type="default" onClick={onCancel} shape="round">
             Cancel
           </Button>,
-          <Button key="submit" type="primary" onClick={onOk}>
+          <Button className="primary-button" key="submit" type="primary" onClick={onOk}>
             Confirm
           </Button>
         ]}

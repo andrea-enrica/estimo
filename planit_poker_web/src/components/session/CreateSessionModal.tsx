@@ -137,6 +137,7 @@ export default function CreateSessionModal(props: IOwnProps) {
         <Button
           key="submit"
           type="primary"
+          className="primary-button"
           htmlType="submit"
           form="createSessionForm"
         >

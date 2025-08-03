@@ -43,6 +43,7 @@ export default function UserModal(props: IOwnProps) {
         </Button>,
         <Button
           key="submit"
+          className="primary-button"
           type="primary"
           htmlType="submit"
           form="myForm"

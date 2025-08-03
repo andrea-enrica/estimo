@@ -64,10 +64,10 @@ const UsersTable = () => {
         <Tag
           color={
             text === UserRole.ADMIN
-              ? "red"
+              ? "#d94e4e"
               : text === UserRole.MANAGER
-              ? "orange"
-              : "blue"
+              ? "#d9822b"
+              : "#5c859e"
           }
         >
           {text}
@@ -83,6 +83,7 @@ const UsersTable = () => {
             <Flex gap="small" align="center" wrap>
               <Button
                 icon={<EditOutlined />}
+                className="primary-button"
                 type="primary"
                 shape="circle"
                 onClick={() => {
@@ -94,9 +95,9 @@ const UsersTable = () => {
               {record.id !== userId && (
                 <Button
                   icon={<DeleteOutlined />}
+                  className="delete-button"
                   type="primary"
                   shape="circle"
-                  danger
                   onClick={() => {
                     setShowDeleteModal(true);
                     setCurrentSelectedUser(record);

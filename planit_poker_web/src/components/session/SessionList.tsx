@@ -174,6 +174,7 @@ export default function SessionsList() {
                 icon={<PlusOutlined />}
                 onClick={toggleCreateSessionModal}
                 type="primary"
+                className="primary-button"
                 size="large"
               >
                 {FilterSessionsEnum.CREATE_SESSION}
@@ -183,6 +184,7 @@ export default function SessionsList() {
               <Button
                 icon={<FormOutlined />}
                 onClick={getManagedSessions}
+                className="primary-button"
                 type="primary"
                 size="large"
               >
@@ -192,6 +194,7 @@ export default function SessionsList() {
             <Button
               icon={<UserAddOutlined />}
               onClick={getInvitedInSessions}
+              className="primary-button"
               type="primary"
               size="large"
             >
@@ -200,6 +203,7 @@ export default function SessionsList() {
             <Button
               icon={<CheckOutlined />}
               onClick={getParticipatedInSessions}
+              className="primary-button"
               type="primary"
               size="large"
             >

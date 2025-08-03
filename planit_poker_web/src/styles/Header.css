@@ -1,5 +1,6 @@
 .header-style {
-  background-color: #000099;
+  background-color: #395a6d !important;
+  color: white;
   position: fixed;
   top: 0;
   left: 0;
@@ -10,13 +11,13 @@
   justify-content: end;
   align-items: center;
   height: 50px;
-  color: white;
   z-index: 7;
 }
 
 .logo-style {
   display: flex;
   align-items: center;
+  background-color: #f8f1e7;
 }
 
 .image-header-style {

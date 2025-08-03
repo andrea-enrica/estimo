@@ -67,6 +67,7 @@ export default function AdminSessionList() {
         <Card className={`user-card  ${isOpen ? "shifted" : ""}`}>
           <div className="card-header">
             <Button
+              className="primary-button"
               type="primary"
               icon={<AppstoreAddOutlined />}
               onClick={toggleAddSessionModal}

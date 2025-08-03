@@ -32,6 +32,7 @@ export default function DeleteUserModal(props: IOwnProps) {
           key="submit"
           type="primary"
           danger
+          className="delete-button"
           onClick={handleOnDeleteUser}
           icon={<DeleteOutlined />}
         >

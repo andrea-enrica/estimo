@@ -56,6 +56,7 @@ export default function AdminUserList() {
         <Card className={`user-card ${isOpen ? "shifted" : ""}`}>
           <div className="card-header">
             <Button
+              className="primary-button"
               type="primary"
               icon={<UserAddOutlined />}
               onClick={toggleAddUserModal}

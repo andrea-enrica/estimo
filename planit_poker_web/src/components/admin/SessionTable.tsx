@@ -54,6 +54,7 @@ const SessionTable = (props: IOwnProps) => {
             {text}
             <Button
               icon={<EditOutlined />}
+              className="primary-button"
               type="primary"
               shape="circle"
               onClick={() => {
@@ -97,7 +98,7 @@ const SessionTable = (props: IOwnProps) => {
                 icon={<DeleteOutlined />}
                 type="primary"
                 shape="circle"
-                danger
+                className="delete-button"
                 onClick={() => {
                   setShowDeleteModal(true);
                   setCurrentSelectedSession(record);

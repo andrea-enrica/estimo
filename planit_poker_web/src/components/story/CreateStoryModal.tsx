@@ -67,6 +67,7 @@ export default function CreateStoryModal(props: IOwnProps) {
             type="primary"
             htmlType="submit"
             form="createStoryForm"
+            className="primary-button"
             disabled={!showButton || storyList.length ? false : true}
           >
             Submit
@@ -87,7 +88,7 @@ export default function CreateStoryModal(props: IOwnProps) {
           </Form.Item>
         </Form>
         {showButton === true && (
-          <Button onClick={handleAdd} type="primary" icon={<PlusOutlined />}>
+          <Button className="primary-button" onClick={handleAdd} type="primary" icon={<PlusOutlined />}>
             Add
           </Button>
         )}

@@ -34,6 +34,7 @@ export default function EditProfileModal(props: IOwnProps) {
           Cancel
         </Button>,
         <Button
+          className="primary-button"
           key="submit"
           type="primary"
           htmlType="submit"

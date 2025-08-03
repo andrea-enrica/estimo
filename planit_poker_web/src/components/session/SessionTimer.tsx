@@ -23,5 +23,5 @@ export default function SessionTimer(props: IOwnProps) {
     }
   }, [isSessionActive, startTime, hasRefreshed, startTimer, stopTimer]);
 
-  return <p>{time}</p>;
+  return <p style={{color: "#395a6d"}}>{time}</p>;
 }

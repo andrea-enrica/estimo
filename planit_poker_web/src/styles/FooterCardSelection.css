@@ -2,7 +2,7 @@
   position: fixed;
   bottom: 0;
   width: 60%;
-  background-color: #f0f0f0;
+  background-color: #cad8de;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, height 0.3s ease;
 }
@@ -26,13 +26,13 @@
 
 .footer-title {
   font-size: 1.2em;
-  color: #333;
+  color: #395a6d;
   margin: 0;
 }
 
 .arrow-icon {
   margin-left: 10px;
-  border: solid #333;
+  border: solid #395a6d;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 5px;

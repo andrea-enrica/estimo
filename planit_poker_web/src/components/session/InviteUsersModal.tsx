@@ -48,6 +48,7 @@ export default function InviteUsersModal(props: IOwnProps) {
         <Button
           key="submit"
           type="primary"
+          className="primary-button"
           htmlType="submit"
           form="inviteUsersForm"
         >

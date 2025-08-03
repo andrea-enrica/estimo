@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import {Card, Tour} from "antd";
 import { StoryDto } from "../../utils/dtos/StoryDto";
 import { UserSessionRole } from "../../utils/Enums";
 import { useState } from "react";
@@ -38,7 +38,7 @@ export default function SessionControlDashboard(props: ISessionControlProps) {
     onRoleChange,
     createStory,
     toggleInviteUsersModal,
-    isConnected
+    isConnected,
   } = props;
 
   const [activeTabKey, setActiveTabKey] = useState<string>("usersControl");
@@ -47,18 +47,18 @@ export default function SessionControlDashboard(props: ISessionControlProps) {
     {
       key: "usersControl",
       tab: (
-        <span className="tab-label">
-          <UsergroupAddOutlined className="tab-icon" />
-          <span className="tab-text">Users</span>
+        <span className="tab-label" style={{color: "white"}}>
+          <UsergroupAddOutlined className="tab-icon" style={{color: "white"}} />
+          <span className="tab-text" style={{color: "white"}}>Users</span>
         </span>
       )
     },
     {
       key: "storiesControl",
       tab: (
-        <span className="tab-label">
-          <InboxOutlined className="tab-icon" />
-          <span className="tab-text">Stories</span>
+        <span className="tab-label" style={{color: "white"}}>
+          <InboxOutlined className="tab-icon" style={{color: "white"}}/>
+          <span className="tab-text" style={{color: "white"}}>Stories</span>
         </span>
       )
     }

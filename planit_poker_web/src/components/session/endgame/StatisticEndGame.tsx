@@ -20,6 +20,7 @@ export default function StatisticEndGame() {
           <Button
             icon={<HomeOutlined />}
             type="primary"
+            className="primary-button"
             onClick={() => {
               navigate(RoutePaths.ADMIN_USER_MANAGER_HOME);
             }}

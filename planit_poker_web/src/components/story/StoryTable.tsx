@@ -52,8 +52,8 @@ const DragHandle: React.FC = () => {
 
 const columns: TableColumnsType<StoryDto> = [
   { key: "sort", align: "center", width: 100, render: () => <DragHandle /> },
-  { title: "Title", dataIndex: "title" },
-  { title: "Description", dataIndex: "description" },
+  { title: "Title", dataIndex: "title"},
+  { title: "Description", dataIndex: "description"},
   {
     title: "Average",
     dataIndex: "average",
@@ -141,7 +141,7 @@ const StoryTable: React.FC<IOwnProps> = (props: IOwnProps) => {
       <div className="story-table-header">
         {UserRole.MANAGER === userRole && authUserId === sessionManagerId && (
           <Button
-            className="add-story-button"
+            className="add-story-button primary-button"
             type="primary"
             onClick={toggleCreateStoryModal}
             icon={<PlusOutlined />}
@@ -169,6 +169,7 @@ const StoryTable: React.FC<IOwnProps> = (props: IOwnProps) => {
               columns={columns}
               dataSource={dataSource}
               pagination={false}
+              // style={{borderRadius: "8px"}}
           />
         </div>
       ) : (
@@ -183,6 +184,7 @@ const StoryTable: React.FC<IOwnProps> = (props: IOwnProps) => {
               columns={columns}
               dataSource={dataSource}
               pagination={false}
+
             />
           </SortableContext>
         </DndContext>

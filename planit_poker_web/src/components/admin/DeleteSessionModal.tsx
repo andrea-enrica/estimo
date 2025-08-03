@@ -29,7 +29,7 @@ export default function DeleteSessionModal(props: IOwnProps) {
         <Button
           key="submit"
           type="primary"
-          danger
+          className="delete-button"
           onClick={handleOnDeleteSession}
           icon={<DeleteOutlined />}
         >

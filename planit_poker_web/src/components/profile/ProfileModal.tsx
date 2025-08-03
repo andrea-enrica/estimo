@@ -26,6 +26,7 @@ export default function ProfileModal(props: IOwnProps) {
         </Button>,
         <Button
           key="edit"
+          className="primary-button"
           type="primary"
           icon={<EditOutlined />}
           onClick={onEdit}

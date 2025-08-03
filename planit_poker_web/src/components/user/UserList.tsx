@@ -1,4 +1,4 @@
-import { Avatar, Button, Dropdown, Flex, List, MenuProps, Tag } from "antd";
+import {Avatar, Button, Dropdown, Flex, List, MenuProps, Tag, Tour} from "antd";
 import "../../styles/UserList.css";
 import { UserMessageDto } from "../../utils/dtos/UserMessageDto";
 import {
@@ -78,13 +78,13 @@ const UserList: React.FC<IUserListProps> = (props: IUserListProps) => {
   const getTagColor = (role: UserSessionRole) => {
     switch (role) {
       case UserSessionRole.USER:
-        return "blue";
+        return "#5c859e";
       case UserSessionRole.OBSERVER:
-        return "green";
+        return "#8a9e77";
       case UserSessionRole.MANAGER:
-        return "orange";
+        return "#d9822b";
       default:
-        return "blue";
+        return "#5c859e";
     }
   };
 
@@ -93,7 +93,7 @@ const UserList: React.FC<IUserListProps> = (props: IUserListProps) => {
       {contextHolder}
       {UserRole.MANAGER === userRole && authUserId === sessionManagerId && (
         <Button
-        className="add-story-button"
+        className="add-story-button primary-button"
         type="primary"
         ref={refInviteUsers}
         icon={<UserAddOutlined />}
@@ -101,7 +101,7 @@ const UserList: React.FC<IUserListProps> = (props: IUserListProps) => {
         disabled={!isConnected}
     >
       {SessionDashboard.INVITE_USERS}
-    </Button>
+        </Button>
       )}
         <List
           itemLayout="horizontal"
@@ -122,14 +122,14 @@ const UserList: React.FC<IUserListProps> = (props: IUserListProps) => {
                       menu={menuProps}
                       onOpenChange={() => setCurrentSelectedUser(item)}
                     >
-                      <Button type="primary" icon={<EditOutlined />}></Button>
+                      <Button className="primary-button" type="primary" icon={<EditOutlined />}></Button>
                     </Dropdown>
                   )}
                 {sessionManagerId === loggedUserId &&
                   item.userId !== loggedUserId && (
                     <Button
                       type="primary"
-                      danger
+                      className="delete-button"
                       icon={<UserDeleteOutlined />}
                       onClick={() => {
                         setShowDeleteModal(true);

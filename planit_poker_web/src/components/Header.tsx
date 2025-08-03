@@ -24,7 +24,7 @@ export default function Header() {
     <div className="header-style">
       <div className="user-header">
         <Button
-          className="header-profile-button"
+          className="header-profile-button primary-button"
           type="primary"
           onClick={toggleProfileModal}
           shape="round"

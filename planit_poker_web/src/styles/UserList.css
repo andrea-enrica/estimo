@@ -1,6 +1,7 @@
 .ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-title {
   font-size: larger;
   text-align: left;
+  color: white
 }
 
 .ant-list .ant-list-item .ant-list-item-meta .ant-list-item-meta-description {

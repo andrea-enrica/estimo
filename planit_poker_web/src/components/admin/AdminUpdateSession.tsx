@@ -65,9 +65,9 @@ export default function AdminUpdateSession(props: IOwnProps) {
         <Button
           key="submit"
           htmlType="submit"
+          className="primary-button custom-button"
           type="primary"
           form="myForm"
-          className="custom-button"
           icon={<SaveOutlined />}
         >
           Save

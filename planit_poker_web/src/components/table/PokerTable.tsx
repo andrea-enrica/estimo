@@ -110,7 +110,7 @@ export default function PokerTable(props: PokerTableProps) {
                       height="150"
                       rx="10"
                       ry="15"
-                      fill="#e8e7e6"
+                      fill="#cad8de"
                     />
                   </svg>
                 </div>

@@ -36,8 +36,8 @@ export default function PokerCard(props: PokerCardProps) {
               height="140"
               rx="10"
               ry="15"
-              fill={isSelected ? "#000099" : "#B1E3EE"}
-              stroke={isSelected ? "#000099" : "#B1E3EE"}
+              fill={isSelected ? "#395a6d" : "#5c859e"}
+              stroke={isSelected ? "#395a6d" : "#5c859e"}
               strokeWidth="7"
             />
             <text
@@ -47,7 +47,7 @@ export default function PokerCard(props: PokerCardProps) {
               textAnchor="middle"
               fontSize={fontSize}
               fontFamily="Arial"
-              fill={isSelected ? "#FFFFFF" : "#000099"}
+              fill={isSelected ? "#FFFFFF" : "#395a6d"}
               fontWeight="700"
             >
               {value}
@@ -81,8 +81,8 @@ export default function PokerCard(props: PokerCardProps) {
               height="140"
               rx="10"
               ry="15"
-              fill="#000099"
-              stroke="#000099"
+              fill="#395a6d"
+              stroke="#395a6d"
               strokeWidth="7"
             />
           </svg>
