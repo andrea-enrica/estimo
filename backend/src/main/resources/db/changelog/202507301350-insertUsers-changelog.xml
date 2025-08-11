@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="20250730-1350" author="andrea">
+        <insert tableName="users">
+            <column name="full_name" value="Robert" />
+            <column name="username" value="rob" />
+            <column name="password" value="123" />
+            <column name="email" value="robert@gmail.com" />
+            <column name="phone_number" value="07000000" />
+            <column name="role" value="ADMIN" />
+        </insert>
+        <insert tableName="users">
+            <column name="full_name" value="Andrei" />
+            <column name="username" value="andrei" />
+            <column name="password" value="123" />
+            <column name="email" value="andrei@gmail.com" />
+            <column name="phone_number" value="07000000" />
+            <column name="role" value="USER" />
+        </insert>
+        <insert tableName="users">
+            <column name="full_name" value="Tudor" />
+            <column name="username" value="tudor" />
+            <column name="password" value="user" />
+            <column name="email" value="tudor@gmail.com" />
+            <column name="phone_number" value="07000000" />
+            <column name="role" value="USER" />
+        </insert>
+        <insert tableName="users">
+            <column name="full_name" value="Andrea" />
+            <column name="username" value="andrea" />
+            <column name="password" value="admin" />
+            <column name="email" value="andrea@gmail.com" />
+            <column name="phone_number" value="07000000" />
+            <column name="role" value="ADMIN" />
+        </insert>
+        <insert tableName="users">
+            <column name="full_name" value="Raul" />
+            <column name="username" value="raul" />
+            <column name="password" value="manager" />
+            <column name="email" value="raul@gmail.com" />
+            <column name="phone_number" value="07000000" />
+            <column name="role" value="MANAGER" />
+        </insert>
+    </changeSet>
+</databaseChangeLog>

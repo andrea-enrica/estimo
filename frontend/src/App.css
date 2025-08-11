@@ -1,0 +1,78 @@
+html, body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.App {
+  min-height: 100vh;
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* General form element border radius */
+.ant-input,
+.ant-select-selector,
+.ant-btn,
+.ant-input-outlined,
+.ant-select-outlined .ant-select-selector {
+  border-radius: 6px !important; /* Unified border-radius for consistency */
+}
+
+.ant-form-item-control-input,
+.ant-form-item-control-input-content {
+  border-radius: 6px !important; /* Ensure form items are squared too */
+}
+
+.ant-tag {
+  border-radius: 12px;
+}
+
+.ant-pagination {
+  border-radius: 12px;
+}
+
+.pagination-container {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
