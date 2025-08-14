@@ -1,5 +1,6 @@
 package com.agiletools.estimo.controllers;
 
+import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -173,11 +174,32 @@ public class SocketController {
 
 
     @MessageMapping(WebSocketPaths.SAVE_VOTES)
+    @Transactional
     public void handleSaveVotes(@DestinationVariable final Long id, @DestinationVariable final Long storyId, @DestinationVariable final String currentStoryAverage) {
 
         final Map<Long, UserMessageDto> users = sessionUsers.get(id);
         userStoryDetailsService.saveUserStoryDetails(users, storyId);
         storyService.updateStoryAverage(storyId, currentStoryAverage);
+
+        final List<StoryDto> stories = sessionStories.get(id);
+        StoryDto updatedStory = null;
+
+        if (stories != null) {
+            for (int i = 0; i < stories.size(); i++) {
+                StoryDto s = stories.get(i);
+                if (Objects.equals(s.getKey(), storyId)) {
+                    s.setAverage(currentStoryAverage);
+                    updatedStory = s;
+                    stories.set(i, updatedStory);
+                    break;
+                }
+            }
+        }
+
+        if(updatedStory != null) {
+            sessionStories.put(id, stories);
+            notifyStories(id);
+        }
 
         messagingTemplate.convertAndSend(WebSocketPaths.TOPIC_VOTES_SAVED.replace("{id}", id.toString()), "Votes saved");
     }

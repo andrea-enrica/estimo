@@ -335,6 +335,19 @@ export default function SessionPage() {
           );
         });
 
+        stompClient.subscribe(
+            `/app/session/${id}/save-votes/${stories[currentStoryIndex].key}/${currentStoryAverage}`, () => {
+                const latestStories = storiesRef.current;
+                if (latestStories && latestStories.length > 0) {
+                    const currentStory = latestStories[currentStoryIndex];
+                    if (currentStory) {
+                    setCurrentStoryAverage(currentStory.average || "N/A");
+                    setCurrentStory(currentStory);
+                    }
+                }
+            }
+        );
+
         stompClient.subscribe(`/topic/session/${id}/next`, () => {
           setCurrentStoryIndex((prevIndex) => {
             const latestStories = storiesRef.current;
@@ -416,10 +429,30 @@ export default function SessionPage() {
     stompClientRef.current?.send(`/app/session/${id}/clear-estimation`);
   };
 
+  const isValidAvarage = (avarage: any) =>
+  typeof avarage === "string" ? avarage.trim() !== "" && avarage !== "N/A" : avarage != null;
+
   const handleNextStory = () => {
-    stompClientRef.current?.send(
-      `/app/session/${id}/save-votes/${stories[currentStoryIndex].key}/${currentStoryAverage}`
-    );
+      debugger;
+    const currentStory = stories[currentStoryIndex];
+    if (!currentStory) return;
+
+    const shouldSave = isValidAvarage(currentStoryAverage) && currentStory.average !== currentStoryAverage;
+
+    if(shouldSave){
+      setStories(prev => {
+        const next = prev.map(s => s.key === currentStory.key ? { ...s, average: currentStoryAverage } : s);
+        storiesRef.current = next;
+        return next;
+      });
+
+      stompClientRef.current?.send(
+          `/app/session/${id}/save-votes/${stories[currentStoryIndex].key}/${currentStoryAverage}`
+      );
+      //check if is working
+      stompClientRef.current?.send(`/topic/session/${id}/stories`);
+    }
+
     stompClientRef.current?.send(`/app/session/${id}/next`);
   };
 

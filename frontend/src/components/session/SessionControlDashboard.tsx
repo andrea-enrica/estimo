@@ -53,16 +53,14 @@ interface ISessionDashboardProps {
 interface ISessionControlProps {
   isSessionActive: boolean;
   currentStory: StoryDto | null;
-  currentStoryIndex: number;
-  storyList: StoryDto[];
   isConnected: boolean;
+  storyList: StoryDto[];
   managerId: number;
   estimationProgressPercent: number;
   toggleOpenTour: boolean;
   authSessionRole: string;
   onStartSession: () => void;
   onEndSession: () => void;
-  onNextStory: () => void;
   showDrawerParticipants: () => void;
   showDrawerStories: () => void;
   toggleLeaveSessionModal: () => void;
@@ -97,7 +95,6 @@ const specialVotes: string[] = ["?", "Coffee"];
 const EstimationControlsContent = (props: ISessionControlProps) => {
   const {
     isSessionActive,
-    currentStoryIndex,
     storyList,
     isConnected,
     managerId,
@@ -106,7 +103,6 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
     authSessionRole,
     onStartSession,
     onEndSession,
-    onNextStory,
     toggleLeaveSessionModal,
     toggleAddFeedbackModal,
     flipAllCards,
@@ -126,9 +122,7 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
 
   const refStartSession = useRef(null);
   const refEndSession = useRef(null);
-  const refNextStory = useRef(null);
   const refStopEstimation = useRef(null);
-  const refInviteUsers = useRef(null);
   const refAddFeedback = useRef(null);
   const refSeeStatistics = useRef(null);
   const refRevoteStory = useRef(null);
@@ -145,11 +139,6 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
       target: () => refEndSession.current
     },
     {
-      title: "Next Story",
-      description: "Move to the next story for estimation.",
-      target: () => refNextStory.current
-    },
-    {
       title: "Stop Estimation",
       description: "Reveal all cards and stop the estimation.",
       target: () => refStopEstimation.current
@@ -164,8 +153,13 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
       title: "Add Feedback",
       description: "Tell us what you think about this session!",
       target: () => refAddFeedback.current
+    },
+   {
+      title: "Revote Story",
+      description: "Click here to revote the current story.",
+      target: () => refRevoteStory.current
     }
-  ];
+];
 
   return (
     <>
@@ -227,20 +221,6 @@ const EstimationControlsContent = (props: ISessionControlProps) => {
                   {SessionDashboard.STOP_ESTIMATION}
                 </Button>
               </Tooltip>
-
-              <Button
-                ref={refNextStory}
-                icon={<RightOutlined />}
-                className="manager-button"
-                onClick={onNextStory}
-                loading={!isConnected}
-                disabled={
-                  !isSessionActive || currentStoryIndex === storyList.length - 1
-                }
-              >
-                {SessionDashboard.NEXT_STORY}
-              </Button>
-
               <Button
                   ref={refEndSession}
                   danger
@@ -303,21 +283,21 @@ const EstimationStatisticsContent = (props: ISessionStatisticsProps) => {
   } = props;
 
   const valueSelection = cardValues.map(
-    (cardSelection: CardSelectionDto) => cardSelection.value
+      (cardSelection: CardSelectionDto) => cardSelection.value
   );
 
   const voteCounts = useMemo(() => {
     const counts: Record<string, number> = {};
 
     const voteValues = cards
-      .map((card: CardDto) => card.value)
-      .map((value: string) => {
-        if (value === "") {
-          return "?";
-        }
+        .map((card: CardDto) => card.value)
+        .map((value: string) => {
+          if (value === "") {
+            return "?";
+          }
 
-        return value;
-      });
+          return value;
+        });
     voteValues.forEach((vote) => {
       counts[vote] = (counts[vote] || 0) + 1;
     });
@@ -327,14 +307,14 @@ const EstimationStatisticsContent = (props: ISessionStatisticsProps) => {
 
   const numericVotes = useMemo(() => {
     return Object.entries(voteCounts)
-      .filter(([vote]) => !specialVotes.includes(vote))
-      .flatMap(([vote, count]) => {
-        const numericVote = voteTypes[vote] || parseFloat(vote);
-        if (!isNaN(numericVote)) {
-          return Array(count).fill(numericVote);
-        }
-        return [];
-      });
+        .filter(([vote]) => !specialVotes.includes(vote))
+        .flatMap(([vote, count]) => {
+          const numericVote = voteTypes[vote] || parseFloat(vote);
+          if (!isNaN(numericVote)) {
+            return Array(count).fill(numericVote);
+          }
+          return [];
+        });
   }, [voteCounts]);
 
   const computeAverage: number = useMemo(() => {
@@ -350,7 +330,7 @@ const EstimationStatisticsContent = (props: ISessionStatisticsProps) => {
     }
     let closestValue = cardValues[0];
     let minDifference = Math.abs(
-      average - (voteTypes[closestValue] || parseFloat(closestValue))
+        average - (voteTypes[closestValue] || parseFloat(closestValue))
     );
 
     cardValues.forEach((value) => {
@@ -410,31 +390,31 @@ const EstimationStatisticsContent = (props: ISessionStatisticsProps) => {
   };
 
   return !isSessionActive || (isSessionActive && isStoryInProgress) ? (
-    <Result
-      icon={
-        <span>
-          {" "}
-          <Spin indicator={<LoadingOutlined spin />} size="large" />{" "}
-        </span>
-      }
-      title={
-        <Typography.Title level={3} style={{color: "#395a6d"}}>
-          Waiting for a story estimation to be completed...
-        </Typography.Title>
-      }
-    />
+      <Result
+          icon={
+            <span>
+      {" "}
+              <Spin indicator={<LoadingOutlined spin/>} size="large"/>{" "}
+    </span>
+          }
+          title={
+            <Typography.Title level={3} style={{color: "#395a6d"}}>
+              Waiting for a story estimation to be completed...
+            </Typography.Title>
+          }
+      />
   ) : (
-    <>
-      <Tooltip
-        className="vote-distribution-tooltip"
-        title="Average is approximated to the nearest value used in the estimation value selection for the given session."
-      >
-        <Title level={4}>Vote Distribution</Title>
-      </Tooltip>
-      <Pie {...chartConfig} />
-    </>
+      <>
+        <Tooltip
+            className="vote-distribution-tooltip"
+            title="Average is approximated to the nearest value used in the estimation value selection for the given session."
+        >
+          <Title level={4}>Vote Distribution</Title>
+        </Tooltip>
+        <Pie {...chartConfig} />
+      </>
   );
-};
+}
 
 export default function SessionControlDashboard(props: ISessionDashboardProps) {
   const {
@@ -462,9 +442,13 @@ export default function SessionControlDashboard(props: ISessionDashboardProps) {
     flipAllCards,
     onPauseStory,
     onToggleClose,
-    goToStatistics
+    goToStatistics,
   } = props;
 
+  const authUserRole = getAuthenticatedUserClaim(LocalStorageProperties.role);
+  const authUserId = Number(
+      getAuthenticatedUserClaim(LocalStorageProperties.id)
+  );
   const [activeTabKey, setActiveTabKey] =
     useState<string>("estimationControls");
 
@@ -489,19 +473,26 @@ export default function SessionControlDashboard(props: ISessionDashboardProps) {
     }
   ];
 
+  const refNextStory = useRef(null);
+
+  const steps = [
+    {
+      title: "Next Story",
+      description: "Go to the next story.",
+      target: () => refNextStory.current
+    }];
+
   const contentList: Record<string, React.ReactNode> = {
     estimationControls: (
       <EstimationControlsContent
         isSessionActive={isSessionActive}
         currentStory={currentStory}
-        currentStoryIndex={currentStoryIndex}
         storyList={storyList}
         isConnected={isConnected}
         managerId={managerId}
         estimationProgressPercent={estimationProgressPercent}
         onStartSession={onStartSession}
         onEndSession={onEndSession}
-        onNextStory={onNextStory}
         toggleOpenTour={toggleOpenTour}
         showDrawerParticipants={showDrawerParticipants}
         showDrawerStories={showDrawerStories}
@@ -515,14 +506,33 @@ export default function SessionControlDashboard(props: ISessionDashboardProps) {
       />
     ),
     estimationStatistics: (
-      <EstimationStatisticsContent
-        cards={cards}
-        cardValues={cardValues}
-        valueType={valueType}
-        isStoryInProgress={isStoryInProgress}
-        isSessionActive={isSessionActive}
-        handleUpdateAverage={handleUpdateAverage}
-      />
+      <>
+        <EstimationStatisticsContent
+          cards={cards}
+          cardValues={cardValues}
+          valueType={valueType}
+          isStoryInProgress={isStoryInProgress}
+          isSessionActive={isSessionActive}
+          handleUpdateAverage={handleUpdateAverage}
+        />
+        {authUserRole === UserRole.MANAGER && authUserId === managerId && (
+         <>
+            <Button
+                ref={refNextStory}
+                icon={<RightOutlined />}
+                className="manager-button"
+                onClick={onNextStory}
+                loading={!isConnected}
+                disabled={
+                    !isSessionActive || currentStoryIndex === storyList.length - 1
+                }
+            >
+              {SessionDashboard.NEXT_STORY}
+            </Button>
+            <Tour open={toggleOpenTour} onClose={onToggleClose} steps={steps} />
+         </>
+        )}
+      </>
     )
   };
 

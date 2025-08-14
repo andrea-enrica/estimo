@@ -15,33 +15,32 @@ export default function StatisticEndGame() {
   const navigate = useNavigate();
   return (
     <>
-      {session?.status === SessionStatus.ENDED ? (
-        <div className="statistic-end-game-container">
-          <h1 className="page-title">Session Statistics Overview</h1>
-          <Button
-            icon={<HomeOutlined />}
-            type="primary"
-            className="primary-button"
-            onClick={() => {
-              navigate(RoutePaths.ADMIN_USER_MANAGER_HOME);
-            }}
-          >
-            Back to home page
-          </Button>
-          <Flex
-            className="statistic-end-game-flex"
-            gap="10%"
-            justify="center"
-            align="center"
-          >
-            <ReviewsCard sessionId={Number(id)} />
-            <EstimationListCard sessionId={Number(id)} />
-            <EstimationStatisticsCard sessionId={Number(id)} />
-          </Flex>
-        </div>
-      ) : (
-        <div>
-          <h2>Session has not ended yet.</h2>
+      <div className="statistic-end-game-container">
+        <h1 className="page-title">Session Statistics Overview</h1>
+        <Button
+          icon={<HomeOutlined />}
+          type="primary"
+          className="primary-button"
+          onClick={() => {
+            navigate(RoutePaths.ADMIN_USER_MANAGER_HOME);
+          }}
+        >
+          Back to home page
+        </Button>
+        <Flex
+          className="statistic-end-game-flex"
+          gap="10%"
+          justify="center"
+          align="center"
+        >
+          <ReviewsCard sessionId={Number(id)} />
+          <EstimationListCard sessionId={Number(id)} />
+          <EstimationStatisticsCard sessionId={Number(id)} />
+        </Flex>
+      </div>
+      {session?.status === SessionStatus.ENDED && (
+        <div className="end-game-message">
+          <h2>Session has ended. Thank you for participating!</h2>
         </div>
       )}
     </>
