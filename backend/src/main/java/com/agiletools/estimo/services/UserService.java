@@ -18,6 +18,7 @@ import com.agiletools.estimo.repositories.UserRepository;
 import com.agiletools.estimo.utils.enums.UserRole;
 import com.agiletools.estimo.utils.enums.UserSessionStatus;
 import com.agiletools.estimo.utils.exceptions.UsernameAlreadyExistsException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,7 @@ public class UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Transactional(readOnly = true)
     public UserDto getUserByCredentialsAndPassword(final String credential, final String password) {
         final String encodedPassword = passwordEncoder.encode(password);
         final Predicate<String> isEmail = credentialEmail -> credential.matches(emailRegex);
@@ -50,10 +52,12 @@ public class UserService {
         return userMapper.entityToDto(userRepository.findByUsernameAndPassword(credential, encodedPassword));
     }
 
+    @Transactional(readOnly = true)
     public List<UserDto> getAllUsers() {
         return userMapper.entityListToDtoList(userRepository.findAll());
     }
 
+    @Transactional(readOnly = true)
     public List<UserProfileDto> getAllUsersProfiles() {
 
         final List<UserEntity> users = userRepository.findAll();
@@ -61,6 +65,7 @@ public class UserService {
     }
 
 
+    @Transactional()
     public UserDto createUser(final UserDto userDto) {
         if (isUsernameTaken(userDto.getUsername())) {
             throw new UsernameAlreadyExistsException("Username '" + userDto.getUsername() + "' is already taken.");
@@ -76,12 +81,14 @@ public class UserService {
         return !allByUsername.isEmpty();
     }
 
+    @Transactional(readOnly = true)
     public boolean checkUsernameValability(final Long id, final UserDto userDto) {
         final UserEntity user = userRepository.findById(id).orElseThrow();
         final List<UserEntity> allByUsername = userRepository.findAllByUsername(userDto.getUsername());
         return !allByUsername.isEmpty() && !user.getUsername().equals(userDto.getUsername());
     }
 
+    @Transactional(readOnly = false)
     public UserProfileDto updateUserProfile(final Long id, final UserDto userDto) {
         if(checkUsernameValability(id, userDto)) {
             throw new UsernameAlreadyExistsException("Username is already taken by another user");
@@ -98,6 +105,7 @@ public class UserService {
         return userMapper.entityToProfileDto(userRepository.save(user));
     }
 
+    @Transactional(readOnly = false)
     public UserDto updateAdmin(final Long id, final UserDto userDto) {
         final UserEntity user = userRepository.findById(id).orElseThrow();
 
@@ -119,18 +127,22 @@ public class UserService {
         return userMapper.entityToDto(userRepository.save(user));
     }
 
+    @Transactional(readOnly = false)
     public void deleteUser(final Long userId) {
         userRepository.deleteById(userId);
     }
 
+    @Transactional(readOnly = true)
     public UserDto findUserById(final Long userId) {
         return userMapper.entityToDto(userRepository.findById(userId).orElseThrow());
     }
 
+    @Transactional(readOnly = true)
     public UserProfileDto findUserProfileById(final Long userId) {
         return userMapper.entityToProfileDto(userRepository.findById(userId).orElseThrow());
     }
 
+    @Transactional(readOnly = true)
     public List<SessionDto> getSessionsUserParticipatedIn(final Long userId) {
         final Optional<UserEntity> userEntity = userRepository.findById(userId);
 
@@ -143,6 +155,7 @@ public class UserService {
         return List.of();
     }
 
+    @Transactional(readOnly = true)
     public List<SessionDto> getSessionsUserWasInvitedIn(final Long userId) {
         final Optional<UserEntity> userEntity = userRepository.findById(userId);
 
@@ -155,6 +168,7 @@ public class UserService {
         return List.of();
     }
 
+    @Transactional(readOnly = true)
     public PaginatedResponse<UserDto> usersPaginated(final Integer size, final Integer page) {
         final Pageable pageable = PageRequest.of(page, size);
         final Page<UserEntity> pageWanted = userRepository.findAll(pageable);
@@ -168,6 +182,7 @@ public class UserService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
     public List<UserDto> getSessionManagers() {
         final List<UserEntity> managers = userRepository.findByRole(UserRole.MANAGER);
         return userMapper.entityListToDtoList(managers);

@@ -10,6 +10,7 @@ import com.agiletools.estimo.mappers.UserStoryDetailsMapper;
 import com.agiletools.estimo.repositories.StoryRepository;
 import com.agiletools.estimo.repositories.UserRepository;
 import com.agiletools.estimo.repositories.UserStoryDetailsRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class UserStoryDetailsService {
     private final UserRepository userRepository;
     private final StoryMapper storyMapper;
 
+    @Transactional(readOnly = false)
     public void saveUserStoryDetails(Map<Long, UserMessageDto> users, Long receivedStoryId) {
         if (users != null) {
 
@@ -70,21 +72,25 @@ public class UserStoryDetailsService {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<UserStoryDetailsDto> getAllUserStoryDetails() {
         List<UserStoryDetailsEntity> userStoryDetailsList = userStoryDetailsRepository.findAll();
         return userStoryDetailsMapper.entityListToDtoList(userStoryDetailsList);
     }
 
+    @Transactional(readOnly = true)
     public List<UserStoryDetailsDto> getAllUserStoryDetailsByStoryId(Long storyId) {
         List<UserStoryDetailsEntity> userStoryDetailsList = userStoryDetailsRepository.findByStoryId(storyId);
         return userStoryDetailsMapper.entityListToDtoList(userStoryDetailsList);
     }
 
+    @Transactional(readOnly = true)
     public List<UserStoryDetailsDto> getAllUserStoryDetailsByUserId(Long userId) {
         List<UserStoryDetailsEntity> userStoryDetailsList = userStoryDetailsRepository.findByUserId(userId);
         return userStoryDetailsMapper.entityListToDtoList(userStoryDetailsList);
     }
 
+    @Transactional(readOnly = true)
     public List<UserStoryDetailsDto> getAllUserStoryDetailsBySessionId(Long sessionId) {
         List<StoryDto> allStoriesOnSession = storyMapper.entityListToDtoList(storyRepository.findAllBySessionId(sessionId));
         List<UserStoryDetailsDto> userStoryDetailsList = new ArrayList<>();
@@ -95,6 +101,7 @@ public class UserStoryDetailsService {
         return userStoryDetailsList;
     }
 
+    @Transactional(readOnly = true)
     public List<EstimationPercentStoryDto> getEstimationPercentInSessionStories(Long sessionId) {
         List<StoryDto> allStoriesOnSession = storyMapper.entityListToDtoList(storyRepository.findAllBySessionId(sessionId));
         List<EstimationPercentStoryDto> estimationPercentStoryDtos = new ArrayList<>();

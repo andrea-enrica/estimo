@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.agiletools.estimo.dtos.UserDto;
 import com.agiletools.estimo.utils.exceptions.AuthenticationCredentialsNotFoundException;
 import com.agiletools.estimo.utils.exceptions.JwtAuthenticationException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
@@ -32,6 +33,7 @@ public class JwtTokenService {
     @Value("${application.secret}")
     private String secret;
 
+    @Transactional(readOnly = true)
     public Authentication getAuthentication(final HttpServletRequest request) {
         final String token = request.getHeader(HEADER_STRING);
         if (token == null || token.isEmpty()) {

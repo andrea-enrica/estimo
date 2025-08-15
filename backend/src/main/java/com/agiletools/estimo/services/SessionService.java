@@ -19,6 +19,7 @@ import com.agiletools.estimo.utils.enums.SessionStatus;
 import com.agiletools.estimo.utils.enums.UserSessionStatus;
 import com.agiletools.estimo.utils.exceptions.EntityNotFoundException;
 import com.agiletools.estimo.utils.exceptions.ForbiddenOperationException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -32,6 +33,7 @@ public class SessionService {
     private final SessionMapper sessionMapper;
     private final UserMapper userMapper;
 
+    @Transactional(readOnly = true)
     public List<SessionDto> getSessionByCreatorAndManager(Long creatorId, Long sessionManagerId) {
         if (creatorId != null && sessionManagerId != null) {
             List<SessionEntity> searchedSession = sessionRepository.findByCreatorIdAndSessionManagerId(creatorId, sessionManagerId);
@@ -49,23 +51,28 @@ public class SessionService {
         return getAllSessions();
     }
 
+    @Transactional(readOnly = true)
     public List<SessionDto> getSessionByManagerId(Long sessionManagerId) {
         return sessionMapper.entityListToDtoList(sessionRepository.findBySessionManagerId(sessionManagerId));
     }
 
+    @Transactional(readOnly = true)
     public List<SessionDto> getAllSessions() {
         return sessionMapper.entityListToDtoList(sessionRepository.findAll());
     }
 
+    @Transactional(readOnly = true)
     public List<SessionDto> getSessionByCreatorId(Long creatorId) {
         return sessionMapper.entityListToDtoList(sessionRepository.findByCreatorId(creatorId));
     }
 
+    @Transactional(readOnly = true)
     public SessionDto getSessionById(Long sessionId) {
         SessionEntity sessionEntity = sessionRepository.findById(sessionId).orElse(null);
         return sessionMapper.entityToDto(sessionEntity);
     }
 
+    @Transactional(readOnly = true)
     public PaginatedResponse<SessionDto> sessionsPaginated(Integer size, Integer page) {
         Pageable pageable = PageRequest.of(page, size);
         Page<SessionEntity> pageWanted = sessionRepository.findAll(pageable);
@@ -74,16 +81,19 @@ public class SessionService {
         return PaginatedResponse.<SessionDto>builder().content(listOfSessionDtos).currentPage(pageWanted.getNumber()).totalPages(pageWanted.getTotalPages()).totalElements(pageWanted.getTotalElements()).build();
     }
 
+    @Transactional()
     public SessionDto createSession(SessionDto sessionDto) {
         SessionEntity sessionEntity = sessionMapper.dtoToEntity(sessionDto);
         sessionEntity = sessionRepository.save(sessionEntity);
         return sessionMapper.entityToDto(sessionEntity);
     }
 
+    @Transactional()
     public void deleteSession(Long id) {
         sessionRepository.deleteById(id);
     }
 
+    @Transactional()
     public SessionDto updateSessionDetails(Long id, SessionEditDto sessionEditDto) {
         SessionEntity sessionEntity = sessionRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Session not found with id: " + id));
 
@@ -100,6 +110,7 @@ public class SessionService {
         return sessionMapper.entityToDto(updatedSessionEntity);
     }
 
+    @Transactional()
     public SessionDto updateSessionStatus(Long id, SessionStatus status) {
 
         SessionEntity sessionEntity = sessionRepository.findById(id).orElse(null);
@@ -116,6 +127,7 @@ public class SessionService {
         return null;
     }
 
+    @Transactional(readOnly = true)
     public List<SimpleUserDto> getUsersInSession(Long sessionId) {
         Optional<SessionEntity> sessionEntity = sessionRepository.findById(sessionId);
 
