@@ -24,7 +24,7 @@ Edit src/main/resources/application.properties (or .yml):
 4. **Run the backend**
 Open the project in IntelliJ IDEA, build, and run it.
 Liquibase will automatically create the schema and seed default users.
-
+Run the backend locally using local spring profile.
 Or via CLI:
 ./mvnw spring-boot:run
 
