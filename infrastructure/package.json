@@ -1,0 +1,32 @@
+{
+  "name": "cloud-development-estimo",
+  "version": "0.1.0",
+  "bin": {
+    "cloud-development-estimo": "bin/infrastructure.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "install-dependencies": "node build-lambdas.js"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.150",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.7.9",
+    "aws-cdk": "2.1020.1",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.6.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.767.0",
+    "@aws-sdk/client-ecs": "^3.864.0",
+    "@aws-sdk/lib-dynamodb": "^3.767.0",
+    "aws-cdk-lib": "^2.202.0",
+    "aws-sdk": "^2.1692.0",
+    "constructs": "^10.4.2"
+  }
+}
