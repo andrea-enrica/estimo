@@ -23,7 +23,6 @@ Before running Estimo locally, ensure you have:
 - **npm** (comes with Node.js)
 - **Docker** and **Docker Compose**
 - **IntelliJ IDEA** (recommended for backend development)
-- Internet connection for installing dependencies
   
 ## Default Users
 After the first run, Liquibase seeds some default users for testing.
