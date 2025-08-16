@@ -7,7 +7,7 @@ import {
   NETWORK_STACK_PROPS,
   FRONTEND_STACK_PROPS,
   ECS_MONOLITH_STACK_PROPS,
-  // LIQUIBASE_LAMBDA_STACK_PROPS
+  LIQUIBASE_LAMBDA_STACK_PROPS
 } from "../lib/constants/props-constants";
 import { DbClusterStack, DbClusterStackProps } from "../lib/stacks/db-cluster-stack";
 import {EcsMonolithStack} from "../lib/stacks/ecs-monolith-stack";
@@ -24,6 +24,6 @@ new FrontendStack(
 );
 new DbClusterStack(app, "DbClusterStack", DB_CLUSTER_STACK_PROPS);
 new EcsMonolithStack(app, 'EcsMonolithStack', ECS_MONOLITH_STACK_PROPS);
-// new LiquibaseLambdaStack(app, "LiquibaseLambdaStack", LIQUIBASE_LAMBDA_STACK_PROPS);
+new LiquibaseLambdaStack(app, "LiquibaseLambdaStack", LIQUIBASE_LAMBDA_STACK_PROPS);
 
 
