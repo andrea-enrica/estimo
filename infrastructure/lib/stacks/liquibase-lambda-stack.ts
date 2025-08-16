@@ -51,7 +51,7 @@ export class LiquibaseLambdaStack extends cdk.Stack {
             taskRole: ecsTaskRole,
         });
 
-        const liquibaseRepo = ecr.Repository.fromRepositoryName(this, 'liquibase-cloud-project-2025', "planitpoker/liquibase");
+        const liquibaseRepo = ecr.Repository.fromRepositoryName(this, 'liquibase-cloud-project-2025', "estimo/liquibase");
         liquibaseTaskDef.addContainer('Liquibase', {
             image: ecs.ContainerImage.fromEcrRepository(liquibaseRepo, 'latest'),
             logging: ecs.LogDriver.awsLogs({ streamPrefix: 'Liquibase' }),
@@ -70,7 +70,7 @@ export class LiquibaseLambdaStack extends cdk.Stack {
         cdk.Tags.of(liquibaseTaskDef).add("Estimo_2025", "");
 
         const liquibaseRunner = new lambda.Function(this, 'LiquibaseRunner', {
-            code: lambda.Code.fromAsset(path.join(__dirname, './lambda/liquibase-lambda')),
+            code: lambda.Code.fromAsset(path.join(__dirname, 'infrastructure/lib/lambda/liquibase-lambda')),
             runtime: lambda.Runtime.NODEJS_22_X,
             handler: 'index.handler',
             environment: {

@@ -76,7 +76,7 @@ export class EcsMonolithStack extends cdk.Stack {
             taskRole: ecsTaskRole, // role for the tasks executed by the container itself
         });
         cdk.Tags.of(springTaskDef).add("Estimo_2025", "");
-        const springAppRepo = ecr.Repository.fromRepositoryName(this, 'estimo-prod-2025', "estimo/backend");
+        const springAppRepo = ecr.Repository.fromRepositoryName(this, 'backend-cloud-project-2025', "estimo/backend");
         const springContainer = springTaskDef.addContainer('SpringApp', {
             image: ecs.ContainerImage.fromEcrRepository(springAppRepo, "latest"),
             logging: ecs.LogDriver.awsLogs({streamPrefix: 'SpringApp'}),

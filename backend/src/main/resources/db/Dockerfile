@@ -1,2 +1,2 @@
 FROM liquibase/liquibase
-COPY db /liquibase/db
+COPY .. /liquibase/db
