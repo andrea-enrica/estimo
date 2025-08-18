@@ -57,6 +57,7 @@ export class LiquibaseLambdaStack extends cdk.Stack {
             essential: true,
             command: [
                 `--url=jdbc:postgresql://${props.writerInstanceEndpoint}/planitpoker`,
+                "--log-level=debug",
                 "--username=springuser",
                 "--password=${SPRING_DATASOURCE_PASSWORD}",
                 "--changeLogFile=/liquibase/db/liquibase-changelog.xml",
