@@ -5,7 +5,7 @@ export const CDK_DEFAULTS_EU_WEST_1 = {
 
 export const DB_CLUSTER_STACK_PROPS = {
     dbClusterName: `aurora-pg-cluster`,
-    defaultDbName: `springdb`,
+    defaultDbName: `planitpoker`,
     dbUser: `springuser`,
     dbClusterVpcId: `ApplicationVPC`,
     dbClusterVpcName: `application-vpc`,
@@ -35,11 +35,11 @@ export const ECS_MONOLITH_STACK_PROPS = {
     ecsClusterName: `ecs-monolith-stack`,
     ecsClusterVpcId: `ApplicationVPC`,
     ecsClusterVpcName: `application-vpc`,
-    auroraClusterId: `dbclusterstack-aurorapgcluster45510f9b-jpiw407qs00k`,
-    dbSecretId: `DbClusterStackaurorapgclust-hQQqDpYnKTGr`,
-    dbSecretArn: `arn:aws:secretsmanager:eu-west-1:372083569417:secret:DbClusterStackaurorapgclust-hQQqDpYnKTGr-AfDZDq`,
-    dbReaderEndpointAddress: `dbclusterstack-aurorapgcluster45510f9b-jpiw407qs00k.cluster-ro-clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
-    dbWriterEndpointAddress: `dbclusterstack-aurorapgcluster45510f9b-jpiw407qs00k.cluster-clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
+    auroraClusterId: `dbclusterstack-aurorapgcluster45510f9b-ohhtfwqtzvgm`,
+    dbSecretId: `DbClusterStackaurorapgclust-p3CLmqy0H5sm`,
+    dbSecretArn: `arn:aws:secretsmanager:eu-west-1:372083569417:secret:DbClusterStackaurorapgclust-p3CLmqy0H5sm-5oAPCW`,
+    dbReaderEndpointAddress: `dbclusterstack-aurorapgcluster45510f9b-ohhtfwqtzvgm.cluster-ro-clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
+    dbWriterEndpointAddress: `dbclusterstack-aurorapgcluster45510f9b-ohhtfwqtzvgm.cluster-clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
     readerInstanceEndpoint: `aurora-pg-cluster-instance2.clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
     writerInstanceEndpoint: `aurora-pg-cluster-instance1.clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
     appSecretId: `spring-aplication-secret`,
@@ -51,14 +51,14 @@ export const ECS_MONOLITH_STACK_PROPS = {
 };
 
 export const LIQUIBASE_LAMBDA_STACK_PROPS = {
-  ecsClusterName: `EcsMonolithStack-ecsmonolithstack9D37130A-aSsQs4nm50Bg`,
+  ecsClusterName: `EcsMonolithStack-SpringServiceD1FF2F3B-cqi6uaa9otgc`,
   ecsClusterVpcName: `application-vpc`,
   ecsClusterVpcId: `ApplicationVPC`,
-  dbSecretArn: `arn:aws:secretsmanager:eu-west-1:372083569417:secret:DbClusterStackaurorapgclust-hQQqDpYnKTGr-AfDZDq`,
-  dbWriterEndpointAddress: `dbclusterstack-aurorapgcluster45510f9b-jpiw407qs00k.cluster-clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
+  dbSecretArn: `arn:aws:secretsmanager:eu-west-1:372083569417:secret:DbClusterStackaurorapgclust-p3CLmqy0H5sm-5oAPCW`,
+  dbWriterEndpointAddress: `dbclusterstack-aurorapgcluster45510f9b-ohhtfwqtzvgm.cluster-clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
   writerInstanceEndpoint: `aurora-pg-cluster-instance1.clyo68mqwbtb.eu-west-1.rds.amazonaws.com`,
   appSecretArn: `arn:aws:secretsmanager:eu-west-1:372083569417:secret:spring-aplication-secret-xp1oxs`,
-  subnets: [`subnet-0909c761c0027d858`, `subnet-0e77d88ac6be46744`],
+  subnets: [`subnet-080507d1c6960f30b`, `subnet-0a5b61d4f80c235aa`],
   env: CDK_DEFAULTS_EU_WEST_1,
 };
 

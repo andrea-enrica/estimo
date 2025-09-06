@@ -56,7 +56,7 @@ export class LiquibaseLambdaStack extends cdk.Stack {
             logging: ecs.LogDriver.awsLogs({ streamPrefix: 'Liquibase' }),
             essential: true,
             command: [
-                `--url=jdbc:postgresql://${props.writerInstanceEndpoint}/planitpoker`,
+                `--url=jdbc:postgresql://${props.writerInstanceEndpoint}/springdb`,
                 "--log-level=debug",
                 "--username=springuser",
                 "--password=${SPRING_DATASOURCE_PASSWORD}",

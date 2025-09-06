@@ -9,7 +9,7 @@ import {
   ECS_MONOLITH_STACK_PROPS,
   LIQUIBASE_LAMBDA_STACK_PROPS
 } from "../lib/constants/props-constants";
-import { DbClusterStack, DbClusterStackProps } from "../lib/stacks/db-cluster-stack";
+import { DbClusterStack } from "../lib/stacks/db-cluster-stack";
 import {EcsMonolithStack} from "../lib/stacks/ecs-monolith-stack";
 import { LiquibaseLambdaStack} from '../lib/stacks/liquibase-lambda-stack';
 

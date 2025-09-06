@@ -105,7 +105,7 @@ export class EcsMonolithStack extends cdk.Stack {
         const springService = new ecs.FargateService(this, 'SpringService', {
             cluster,
             taskDefinition: springTaskDef,
-            desiredCount: 2,
+            desiredCount: 1,
             assignPublicIp: false,
             vpcSubnets: {subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS},
             securityGroups: [serviceSG],

@@ -1,8 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import { Construct } from "constructs";
 import * as ec2 from "aws-cdk-lib/aws-ec2";
-import * as elb from "aws-cdk-lib/aws-elasticloadbalancingv2"; // fixme fix source
-import { IPUtils } from "../utils/ip-utils";
 
 export interface NetworkStackProps extends cdk.StackProps {
   privateMaskSize: number;
