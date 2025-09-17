@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.767.0",
+    "@aws-sdk/client-ec2": "^3.888.0",
     "@aws-sdk/client-ecs": "^3.864.0",
     "@aws-sdk/lib-dynamodb": "^3.767.0",
     "aws-cdk-lib": "^2.202.0",

@@ -7,42 +7,55 @@ import {
 
 const ecsClient = new ECSClient({ region: "eu-west-1" });
 
-export const handler = async (event: any): Promise<any> => {
-
+export const handler = async () => {
     try {
+        const cluster = process.env.CLUSTER_NAME!;
+        const taskDefinition = process.env.TASK_DEF!;
+        const subnets = process.env.SUBNETS!.split(",");
+
+        // Optional env: SECURITY_GROUPS="sg-abc,sg-def"
+        const sgEnv = process.env.SECURITY_GROUPS;
+        const securityGroups = sgEnv && sgEnv.trim().length > 0
+            ? sgEnv.split(",").map(s => s.trim())
+            : undefined; // let ECS attach the VPC default SG
+
         const runTaskParams = {
-            cluster: process.env.CLUSTER_NAME!,
-            taskDefinition: process.env.TASK_DEF!,
+            cluster,
+            taskDefinition,
             launchType: LaunchType.FARGATE,
+            count: 1,
             networkConfiguration: {
                 awsvpcConfiguration: {
-                    subnets: process.env.SUBNETS!.split(','),
+                    subnets,
+                    ...(securityGroups ? { securityGroups } : {}), // only include if provided
                     assignPublicIp: AssignPublicIp.DISABLED,
                 },
             },
-            count: 1,
         };
-        const runTaskCommand = new RunTaskCommand(runTaskParams);
-        console.log("Cluster name passed to ECS:", process.env.CLUSTER_NAME);
 
-        const runTaskResponse = await ecsClient.send(runTaskCommand);
-        if (!runTaskResponse.tasks || runTaskResponse.tasks.length === 0) {
-            throw new Error("Nu s-a pornit niciun task ECS");
+        console.log("RunTask params (sanitized):", {
+            cluster,
+            taskDefinition,
+            subnets,
+            securityGroups: securityGroups ?? "(default VPC SG)",
+            assignPublicIp: "DISABLED",
+        });
+
+        const resp = await ecsClient.send(new RunTaskCommand(runTaskParams));
+        if (resp.failures?.length) {
+            console.error("RunTask failures:", JSON.stringify(resp.failures, null, 2));
+            throw new Error(
+                `RunTask failed: ${resp.failures.map(f => `${f.arn ?? ""} ${f.reason}`).join("; ")}`
+            );
         }
-        const taskArn = runTaskResponse.tasks[0].taskArn;
-        console.log(`Task ECS pornit: ${taskArn}`);
 
-        console.log("Task state:", runTaskResponse.tasks[0].lastStatus);
+        const taskArn = resp.tasks?.[0]?.taskArn;
+        if (!taskArn) throw new Error("No task ARN returned from RunTask");
 
-        return {
-            statusCode: 200,
-            body: `Task ECS pornit cu succes: ${taskArn}`,
-        };
+        console.log("Started task:", taskArn, "status:", resp.tasks?.[0]?.lastStatus);
+        return { statusCode: 200, body: `Task started: ${taskArn}` };
     } catch (error: any) {
-        console.error("Eroare în Lambda ECS:", error);
-        return {
-            statusCode: 500,
-            body: `Eroare: ${error.message || error}`,
-        };
+        console.error("Lambda error:", error);
+        return { statusCode: 500, body: `Error: ${error.message || error}` };
     }
 };

@@ -50,21 +50,21 @@ export class LiquibaseLambdaStack extends cdk.Stack {
             taskRole: ecsTaskRole,
         });
 
-        const liquibaseRepo = ecr.Repository.fromRepositoryName(this, 'liquibase-cloud-project-2025', "estimo/liquibase");
+        const liquibaseRepo = ecr.Repository.fromRepositoryName(this, 'liquibase-cloud-project-2025', 'estimo/liquibase');
         liquibaseTaskDef.addContainer('Liquibase', {
             image: ecs.ContainerImage.fromEcrRepository(liquibaseRepo, 'latest'),
             logging: ecs.LogDriver.awsLogs({ streamPrefix: 'Liquibase' }),
             essential: true,
-            command: [
-                `--url=jdbc:postgresql://${props.writerInstanceEndpoint}/springdb`,
-                "--log-level=debug",
-                "--username=springuser",
-                "--password=${SPRING_DATASOURCE_PASSWORD}",
-                "--changeLogFile=/liquibase/db/liquibase-changelog.xml",
-                "update"
-            ],
+            entryPoint: ['/bin/sh', '-lc'],
+            command: ['echo "LS:" && ls -R /liquibase && echo "---" && liquibase --log-level=debug update'],
+            environment: {
+                LIQUIBASE_SEARCH_PATH: '/liquibase',
+                LIQUIBASE_COMMAND_URL: `jdbc:postgresql://${props.dbWriterEndpointAddress}:5432/planitpoker?sslmode=require&loginTimeout=5&socketTimeout=30`,
+                LIQUIBASE_COMMAND_USERNAME: 'springuser',
+                LIQUIBASE_COMMAND_CHANGELOG_FILE: 'db/liquibase-changelog.xml',
+            },
             secrets: {
-                SPRING_DATASOURCE_PASSWORD: ecs.Secret.fromSecretsManager(dbSecretObj, 'password'),
+                LIQUIBASE_COMMAND_PASSWORD: ecs.Secret.fromSecretsManager(dbSecretObj, 'password'),
             },
         });
         cdk.Tags.of(liquibaseTaskDef).add("Estimo_2025", "");
@@ -77,6 +77,7 @@ export class LiquibaseLambdaStack extends cdk.Stack {
                 CLUSTER_NAME: props.ecsClusterName,
                 TASK_DEF: liquibaseTaskDef.taskDefinitionArn,
                 SUBNETS: props.subnets.join(","),
+                SECURITY_GROUPS: "sg-0901577d6feaef562"
             },
         });
 
@@ -87,6 +88,15 @@ export class LiquibaseLambdaStack extends cdk.Stack {
                 `arn:aws:ecs:${cdk.Aws.REGION}:${cdk.Aws.ACCOUNT_ID}:cluster/${props.ecsClusterName}`],
         }));
 
+        liquibaseRunner.addToRolePolicy(new iam.PolicyStatement({
+            actions: ['ecs:DescribeTasks'],
+            resources: ['*'], // or scope to your cluster ARN
+        }));
+
+        liquibaseRunner.addToRolePolicy(new iam.PolicyStatement({
+            actions: ['ec2:DescribeNetworkInterfaces'],
+            resources: ['*'],
+        }));
     
         liquibaseRunner.addToRolePolicy(new iam.PolicyStatement({
             actions: ['iam:PassRole'],

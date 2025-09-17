@@ -82,24 +82,37 @@ export class EcsMonolithStack extends cdk.Stack {
             logging: ecs.LogDriver.awsLogs({streamPrefix: 'SpringApp'}),
             environment: {
                 SPRING_DATASOURCE_USERNAME: 'springuser',
-                SPRING_DATASOURCE_READ_ENDPOINT: `jdbc:postgresql://${props.readerInstanceEndpoint}:5432/planitpoker`,
-                SPRING_DATASOURCE_WRITE_ENDPOINT: `jdbc:postgresql://${props.writerInstanceEndpoint}:5432/planitpoker`,
+                SPRING_DATASOURCE_READ_ENDPOINT: `jdbc:postgresql://${props.dbReaderEndpointAddress}:5432/planitpoker?sslmode=require`,
+                SPRING_DATASOURCE_WRITE_ENDPOINT: `jdbc:postgresql://${props.dbWriterEndpointAddress}:5432/planitpoker?sslmode=require`,
                 SPRING_APPLICATION_ALLOWED_ORIGINS: `${props.frontendUrl}`
             },
             secrets: {
                 SPRING_DATASOURCE_PASSWORD: ecs.Secret.fromSecretsManager(dbSecret, 'password'),
                 SPRING_APPLICATION_SECRET: ecs.Secret.fromSecretsManager(appSecret, 'app_secret'),
             },
+            healthCheck: {
+                command: ["CMD-SHELL", "curl -fsS http://localhost:8080/healthcheck || exit 1"],
+                interval: cdk.Duration.seconds(30),
+                timeout: cdk.Duration.seconds(5),
+                startPeriod: cdk.Duration.seconds(20),
+                retries: 3,
+            },
         });
 
+        springContainer.addContainerDependencies();
         springContainer.addPortMappings({containerPort: 8080});
         cdk.Tags.of(springContainer).add("Estimo_2025", "");
+
+        const dbSg = ec2.SecurityGroup.fromSecurityGroupId(
+            this, "DbSg", "sg-00888b08a0fffd30f"
+        );
 
         const serviceSG = new ec2.SecurityGroup(this, "spring-service-sg", {
             vpc: vpc,
             allowAllOutbound: true,
         });
-        serviceSG.addIngressRule(ec2.Peer.ipv4(vpc.vpcCidrBlock), ec2.Port.tcp(8080));
+
+        dbSg.addIngressRule(serviceSG, ec2.Port.tcp(5432), "App to DB")
         cdk.Tags.of(serviceSG).add("Estimo_2025", "");
 
         const springService = new ecs.FargateService(this, 'SpringService', {
@@ -109,9 +122,9 @@ export class EcsMonolithStack extends cdk.Stack {
             assignPublicIp: false,
             vpcSubnets: {subnetType: ec2.SubnetType.PRIVATE_WITH_EGRESS},
             securityGroups: [serviceSG],
+            enableExecuteCommand: true,
         });
         cdk.Tags.of(springService).add("Estimo_2025", "");
-
 
         // 2. Load Balancer Setup
         const albSG = new ec2.SecurityGroup(this, "alb-SG", {
@@ -119,8 +132,9 @@ export class EcsMonolithStack extends cdk.Stack {
             allowAllOutbound: true,
         });
 
-        const enabledIpv4Prefixes = IPUtils.getEnabledIps();
+        serviceSG.addIngressRule(albSG, ec2.Port.tcp(8080), "ALB to app");
 
+        const enabledIpv4Prefixes = IPUtils.getEnabledIps();
         for (var ipv4 of enabledIpv4Prefixes) {
             albSG.addIngressRule(
                 ec2.Peer.ipv4(ipv4),
@@ -152,13 +166,22 @@ export class EcsMonolithStack extends cdk.Stack {
             certificates: [certificate],
         });
 
+        alb.addListener('Http', {
+            port: 80,
+            open: true,
+            defaultAction: elb.ListenerAction.redirect({
+                protocol: 'HTTPS',
+                port: '443',
+            }),
+        });
+
         httpsListener.addTargets("alb-target-group", {
             targetGroupName: "alb-target-group",
             healthCheck: {
                 path: `/healthcheck`,
                 healthyThresholdCount: 3,
                 unhealthyThresholdCount: 3,
-                healthyHttpCodes: "200-299",
+                healthyHttpCodes: "200",
                 interval: cdk.Duration.seconds(30),
             },
             port: 8080,
