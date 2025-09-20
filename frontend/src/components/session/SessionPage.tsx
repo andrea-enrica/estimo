@@ -433,7 +433,6 @@ export default function SessionPage() {
   typeof avarage === "string" ? avarage.trim() !== "" && avarage !== "N/A" : avarage != null;
 
   const handleNextStory = () => {
-      debugger;
     const currentStory = stories[currentStoryIndex];
     if (!currentStory) return;
 

@@ -25,9 +25,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull FilterChain filterChain) throws ServletException, IOException {
         try {
             Authentication auth = jwtTokenService.getAuthentication(servletRequest);
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            if (auth != null) {
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (final JwtAuthenticationException ex) {
+            SecurityContextHolder.clearContext();
             servletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error parsing JWT Token");
         }
     }

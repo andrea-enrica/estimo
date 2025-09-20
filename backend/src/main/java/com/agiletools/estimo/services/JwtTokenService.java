@@ -36,8 +36,10 @@ public class JwtTokenService {
     @Transactional(readOnly = true)
     public Authentication getAuthentication(final HttpServletRequest request) {
         final String token = request.getHeader(HEADER_STRING);
+
+        // No header → just return null without warning (expected on public routes)
         if (token == null || token.isEmpty()) {
-            log.warn("No jwt token found in request headers");
+            log.debug("No JWT token in headers for {}", request.getRequestURI());
             return null;
         }
 
@@ -51,19 +53,17 @@ public class JwtTokenService {
 
             return createAuthentication(id, role, email);
         } catch (final MalformedJwtException | UnsupportedJwtException ex) {
-            log.error("Unsupported jwt token {} with exception {}",
-                    token, ex.getMessage());
+            // Do NOT log the token value
+            log.warn("Unsupported or malformed JWT for {}: {}", request.getRequestURI(), ex.getMessage());
             throw new JwtAuthenticationException(ex);
         } catch (final ExpiredJwtException ex) {
-            log.error("Expired jwt token {}", ex.getMessage());
+            log.info("Expired JWT for {}: {}", request.getRequestURI(), ex.getMessage());
             throw new JwtAuthenticationException(ex);
         } catch (final AuthenticationCredentialsNotFoundException ex) {
-            log.error("An error occurred while trying to create authentication based on jwt token, missing credentials {}",
-                    ex.getMessage());
+            log.warn("Missing claims in JWT for {}: {}", request.getRequestURI(), ex.getMessage());
             throw new JwtAuthenticationException(ex);
         } catch (final Exception ex) {
-            log.error("Unexpected exception occurred while parsing jwt {} exception: {}",
-                    token, ex.getMessage());
+            log.error("Unexpected JWT parsing error for {}: {}", request.getRequestURI(), ex.getMessage());
             throw new JwtAuthenticationException(ex);
         }
     }
@@ -77,14 +77,14 @@ public class JwtTokenService {
 
     public boolean validateToken(final String token) {
         try {
-            Jws<Claims> claims = parseToken(token);
+            parseToken(token);
             return true;
-        } catch (MalformedJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
-            log.error("Invalid JWT token: {}", ex.getMessage());
         } catch (ExpiredJwtException ex) {
-            log.warn("Expired JWT token: {}", ex.getMessage());
+            log.info("Expired JWT: {}", ex.getMessage());
+        } catch (MalformedJwtException | UnsupportedJwtException | IllegalArgumentException ex) {
+            log.warn("Invalid JWT: {}", ex.getMessage());
         } catch (JwtException ex) {
-            log.error("JWT token validation failed: {}", ex.getMessage());
+            log.error("JWT validation failed: {}", ex.getMessage());
         }
         return false;
     }

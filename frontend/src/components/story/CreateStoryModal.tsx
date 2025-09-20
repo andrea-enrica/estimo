@@ -60,6 +60,7 @@ export default function CreateStoryModal(props: IOwnProps) {
     }
   }, [storyList]);
 
+  const isSubmitDisabled = (isSessionActive && title.length === 0) || (!isSessionActive && storyList.length === 0);
   return (
       <Modal
         centered
@@ -77,7 +78,7 @@ export default function CreateStoryModal(props: IOwnProps) {
             htmlType="submit"
             form="createStoryForm"
             className="primary-button"
-            disabled={!form.isFieldTouched("title") ||  title.length === 0}
+            disabled={isSubmitDisabled}
           >
             Submit
           </Button>

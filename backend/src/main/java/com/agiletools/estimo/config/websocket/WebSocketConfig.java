@@ -22,8 +22,13 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     public void registerStompEndpoints(final StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
                 .addInterceptors(anonymousHandshakeHandler)
-                .setAllowedOriginPatterns("*")
-                .withSockJS();
+                .setAllowedOrigins(
+                        "https://frontend.ubb-sed-estimo.com",
+                        "http://localhost:3000", "http://localhost:5173", "http://localhost:5174", "http://localhost:5050"
+                )
+                .withSockJS()
+                .setWebSocketEnabled(true)
+                .setSessionCookieNeeded(false);
     }
 
     @Override

@@ -1,6 +1,6 @@
 interface AppConfig {
-  baseUrl: string;
-  serverUrl: string;
+  baseUrl: string;   // REST
+  serverUrl: string; // SockJS/STOMP endpoint
 }
 
 const appConfig: AppConfig = {
