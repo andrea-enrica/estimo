@@ -1,2 +1,3 @@
 FROM liquibase/liquibase
-COPY .. /liquibase/db
+# I want to copy from this to /liquibase/db in container
+COPY . /liquibase/db
